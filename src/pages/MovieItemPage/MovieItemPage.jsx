@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import {
-  useParams,
-  Outlet,
-  NavLink,
-  useLocation,
-  Link,
-} from 'react-router-dom';
+import { useParams, Outlet, NavLink, useLocation } from 'react-router-dom';
 import { getMovieById } from '../../services/themoviedbAPI';
 import { MovieItem } from 'components/MovieItem/MovieItem';
 import Loader from '../../components/Loader/Loader';
 import { FiCornerUpLeft } from 'react-icons/fi';
+import { Button } from './MovieItemPage.styled';
 
 export const MovieItemPage = () => {
   const { movieId } = useParams();
@@ -38,10 +33,10 @@ export const MovieItemPage = () => {
     <main>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
-      <Link to={location?.state?.from ?? '/'}>
+      <Button to={location?.state?.from ?? '/'}>
         <FiCornerUpLeft />
         Go back
-      </Link>
+      </Button>
       {!error && <MovieItem movieItem={movieItem} />}
       <br />
       <div>

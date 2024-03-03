@@ -1,3 +1,5 @@
+import { MovieCard, Image, Container } from './MovieItem.styled';
+
 export const MovieItem = ({ movieItem }) => {
   const {
     poster_path,
@@ -10,8 +12,8 @@ export const MovieItem = ({ movieItem }) => {
   } = movieItem;
 
   return (
-    <section>
-      <div>
+    <MovieCard>
+      <Image>
         {poster_path ? (
           <img
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
@@ -20,8 +22,8 @@ export const MovieItem = ({ movieItem }) => {
         ) : (
           <p>No image</p>
         )}
-      </div>
-      <div>
+      </Image>
+      <Container>
         <h1>
           {title || name}
           {release_date && <span>({release_date.slice(0, 4)})</span>}
@@ -40,7 +42,7 @@ export const MovieItem = ({ movieItem }) => {
             </ul>
           </>
         )}
-      </div>
-    </section>
+      </Container>
+    </MovieCard>
   );
 };

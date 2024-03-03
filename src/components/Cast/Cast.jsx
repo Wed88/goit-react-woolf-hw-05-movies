@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieCast } from '../../services/themoviedbAPI';
 import Loader from '../Loader/Loader';
+import { Image, List } from './Cast.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -30,11 +31,11 @@ export const Cast = () => {
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
       {movieCast ? (
-        <ul>
+        <List>
           {movieCast.map(({ id, profile_path, name, character }) => (
             <li key={id}>
               {profile_path ? (
-                <img
+                <Image
                   src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
                   alt={name}
                 />
@@ -45,7 +46,7 @@ export const Cast = () => {
               <p>Character: {character}</p>
             </li>
           ))}
-        </ul>
+        </List>
       ) : (
         <p>We don't have any cast for this movie.</p>
       )}
