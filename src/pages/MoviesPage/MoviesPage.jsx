@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMovieBySearchName } from '../../services/themoviedbAPI';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
@@ -9,7 +9,6 @@ export const MoviesPage = () => {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
@@ -56,7 +55,7 @@ export const MoviesPage = () => {
         <input type="text" name="query" placeholder="Enter name" />
         <button>Search</button>
       </form>
-      {!error > 0 && <MoviesList items={items} location={location} />}
+      {!error > 0 && <MoviesList items={items} />}
     </main>
   );
 };

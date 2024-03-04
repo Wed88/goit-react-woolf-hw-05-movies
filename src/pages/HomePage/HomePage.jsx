@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { getPopularMovies } from '../../services/themoviedbAPI';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import Loader from '../../components/Loader/Loader';
 
 export const HomePage = () => {
-  const location = useLocation();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,7 +29,7 @@ export const HomePage = () => {
       {error && <p>Whoops, something went wrong: {error}</p>}
       {isLoading && <Loader />}
       <h1>Trending today</h1>
-      {!error && <MoviesList items={items} location={location} />}
+      {!error && <MoviesList items={items} />}
     </main>
   );
 };

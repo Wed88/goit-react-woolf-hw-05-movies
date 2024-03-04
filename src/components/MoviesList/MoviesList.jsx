@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-export const MoviesList = ({ items, location }) => {
+export const MoviesList = ({ items }) => {
+  const location = useLocation();
+
   return (
     <ul>
       {items.map(({ id, title, name }) => (
