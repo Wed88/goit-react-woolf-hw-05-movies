@@ -11,17 +11,20 @@ export const MovieItem = ({ movieItem }) => {
     genres,
   } = movieItem;
 
+  const defaultImg =
+    'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+
   return (
     <MovieCard>
       <Image>
-        {poster_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            alt="poster"
-          />
-        ) : (
-          <p>No image</p>
-        )}
+        <img
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+              : defaultImg
+          }
+          alt="poster"
+        />
       </Image>
       <Container>
         <h1>

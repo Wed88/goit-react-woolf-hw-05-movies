@@ -10,6 +10,9 @@ export const Cast = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const defaultImg =
+    'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+
   useEffect(() => {
     async function fetchMovieCast() {
       setIsLoading(true);
@@ -34,14 +37,14 @@ export const Cast = () => {
         <List>
           {movieCast.map(({ id, profile_path, name, character }) => (
             <li key={id}>
-              {profile_path ? (
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                  alt={name}
-                />
-              ) : (
-                <p>No photo</p>
-              )}
+              <Image
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500/${profile_path}`
+                    : defaultImg
+                }
+                alt={name}
+              />
               <p>{name}</p>
               <p>Character: {character}</p>
             </li>
