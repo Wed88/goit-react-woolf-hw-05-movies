@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMovieBySearchName } from '../../services/themoviedbAPI';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
+import { SearchForm } from '../../components/SearchForm/SearchForm';
 import Loader from '../../components/Loader/Loader';
 
 export const MoviesPage = () => {
@@ -35,26 +36,20 @@ export const MoviesPage = () => {
     }
   }, [query]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (form.elements.query.value.trim() === '') {
-      return;
+  const handleSubmit = query => {
+    if (query) {
+      setSearchParams({ query });
     }
-
-    setSearchParams({ query: form.elements.query.value });
-
-    form.reset();
   };
 
   return (
     <main>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {loading && <Loader />}
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <input type="text" name="query" placeholder="Enter name" />
-        <button>Search</button>
-      </form>
+      <SearchForm
+        query={searchParams.get('query')}
+        handleSubmit={handleSubmit}
+      />
       {!error > 0 && <MoviesList items={items} />}
     </main>
   );
