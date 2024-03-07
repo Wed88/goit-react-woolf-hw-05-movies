@@ -5,6 +5,7 @@ import { MovieItem } from 'components/MovieItem/MovieItem';
 import Loader from '../../components/Loader/Loader';
 import { FiCornerUpLeft } from 'react-icons/fi';
 import { Button } from './MovieItemPage.styled';
+import { useRef } from 'react';
 
 export const MovieItemPage = () => {
   const { movieId } = useParams();
@@ -12,6 +13,7 @@ export const MovieItemPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
+  const goBack = useRef(location?.state?.from ?? '/');
 
   useEffect(() => {
     async function fetchMovieItem() {
@@ -33,7 +35,7 @@ export const MovieItemPage = () => {
     <main>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
-      <Button to={location?.state?.from ?? '/'}>
+      <Button to={goBack.current}>
         <FiCornerUpLeft />
         Go back
       </Button>
@@ -43,14 +45,10 @@ export const MovieItemPage = () => {
         <ul>
           <h4>Iditional information</h4>
           <li>
-            <NavLink to={'cast'} state={{ from: location?.state?.from }}>
-              Cast
-            </NavLink>
+            <NavLink to={'cast'}>Cast</NavLink>
           </li>
           <li>
-            <NavLink to={'reviews'} state={{ from: location?.state?.from }}>
-              Reviews
-            </NavLink>
+            <NavLink to={'reviews'}>Reviews</NavLink>
           </li>
         </ul>
       </div>
